@@ -1,25 +1,24 @@
-# sudo: required
-# services:
-#   - docker
+sudo: required
+services:
+  - docker
 
-# before_install:
-#   - docker build -t noaholutunji/react-test -f ./client/Dockerfile.dev ./client
+before_install:
+  - docker build -t noalistic/react-test -f ./client/Dockerfile.dev ./client
 
-# script:
-#   - docker run -e CI=true noaholutunji/react-test npm test -- --coverage
+script:
+  - docker run -e CI=true noalistic/react-test npm test -- --coverage
 
-# after_success:
-#   # build docker images
-#   - docker build -t noalistic/ninostyle-client ./client
-#   - docker build -t noalistic/ninostyle-nginx ./nginx
-#   - docker build -t noalistic/ninostyle-server ./server
-#   # Log in to the docker CLI
-#   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-#   # Take these build images and push to docker hub
-#   - docker push noalistic/ninostyle-client
-#   - docker push noalistic/ninostyle-nginx
-#   - docker push noalistic/ninostyle-server
-
+after_success:
+  # build docker images
+  - docker build -t noalistic/ninostyle-client ./client
+  - docker build -t noalistic/ninostyle-nginx ./nginx
+  - docker build -t noalistic/ninostyle-server ./server
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take these build images and push to docker hub
+  - docker push noalistic/ninostyle-client
+  - docker push noalistic/ninostyle-nginx
+  - docker push noalistic/ninostyle-server
 # deploy:
 #   provider: elasticbeanstalk
 #   region: us-east-2
