@@ -22,8 +22,8 @@ after_success:
 deploy:
   provider: elasticbeanstalk
   region: us-east-2
-  app: ninostyle
-  env: Ninostyle-env
+  app: ninostyle-docker
+  env: NinostyleDocker-env
   bucket_name: elasticbeanstalk-us-east-2-946065250109
   bucket_path: docker-ninostyle
   on:
